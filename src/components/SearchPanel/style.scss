@@ -1,0 +1,25 @@
+$bg-input: #5A5C66;
+$color-input: #B2B7BF;
+
+
+.search {
+    width: 631px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    background-color: $bg-input;
+
+
+    &__input {
+        font-family: 'Roboto', sans-serif;
+        flex: 1;
+        background-color: $bg-input;
+        color: $color-input;
+        outline: none;
+        border: none;
+    }
+
+    &__icon{
+        
+    }
+}
