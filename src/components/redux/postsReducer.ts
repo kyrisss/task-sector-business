@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Dispatch } from "redux"
 
-export interface PostType{
+export interface PostType {
     userId: number,
     id: number,
     title: string,
@@ -12,16 +12,22 @@ export interface PostType{
 export interface initialPostsStoreType {
     posts: PostType[],
     isFetching: boolean,
-    search: string
+    search: string,
+    total: number,
+    currentPage: number,
+    itemsOnPage: number
 }
 
 let initialStore: initialPostsStoreType = {
     posts: [],
-    isFetching: false,
-    search: ''
+    isFetching: true,
+    search: '',
+    total: 0,
+    currentPage: 1,
+    itemsOnPage: 10
 }
 
-type actionType = setPostsACType | toggleFetchingACType | setSearchACType;
+type actionType = setPostsACType | setFetchingACType | setSearchACType | setCurrentPageACType | setTotalACType;
 
 const profileReducer = (state: initialPostsStoreType = initialStore, action: actionType): initialPostsStoreType => {
 
@@ -30,16 +36,29 @@ const profileReducer = (state: initialPostsStoreType = initialStore, action: act
             return {
                 ...state,
                 posts: action.data,
+                total: action.data.length
+
             }
-        case "TOGGLE_FETCHING":
+        case "SET_TOTAL":
             return {
                 ...state,
-                isFetching: !state.isFetching
-                }
+                total: action.data
+
+            }
+        case "SET_FETCHING":
+            return {
+                ...state,
+                isFetching: action.data
+            }
         case "SET_SEARCH":
             return {
                 ...state,
                 search: action.data
+            }
+        case "SET_CURRENT_PAGE":
+            return {
+                ...state,
+                currentPage: action.data
             }
         default:
             return state;
@@ -47,7 +66,7 @@ const profileReducer = (state: initialPostsStoreType = initialStore, action: act
 
 }
 
-export interface setPostsACType {
+interface setPostsACType {
     type: 'SET_POSTS'
     data: PostType[]
 }
@@ -59,17 +78,19 @@ export const SET_POSTS = (data: PostType[]): setPostsACType => {
     }
 }
 
-export interface toggleFetchingACType {
-    type: 'TOGGLE_FETCHING'
+interface setFetchingACType {
+    type: 'SET_FETCHING'
+    data: boolean
 }
 
-export const TOGGLE_FETCHING = (): toggleFetchingACType => {
+export const SET_FETCHING = (data: boolean): setFetchingACType => {
     return {
-        type: 'TOGGLE_FETCHING',
+        type: 'SET_FETCHING',
+        data
     }
 }
 
-export interface setSearchACType {
+interface setSearchACType {
     type: 'SET_SEARCH'
     data: string
 }
@@ -81,16 +102,43 @@ export const SET_SEARCH = (data: string): setSearchACType => {
     }
 }
 
+interface setCurrentPageACType {
+    type: 'SET_CURRENT_PAGE'
+    data: number
+}
+
+export const SET_CURRENT_PAGE = (data: number): setCurrentPageACType => {
+    return {
+        type: 'SET_CURRENT_PAGE',
+        data
+    }
+}
+interface setTotalACType {
+    type: 'SET_TOTAL'
+    data: number
+}
+
+export const SET_TOTAL = (data: number): setTotalACType => {
+    return {
+        type: 'SET_TOTAL',
+        data
+    }
+}
+
+
+
+
 
 
 
 export const getPostsTC = () => {
     return (dispatch: Dispatch<actionType>) => {
-        dispatch(TOGGLE_FETCHING())
+        dispatch(SET_FETCHING(true))
         axios.get(`https://jsonplaceholder.typicode.com/posts`)
             .then((response) => {
                 dispatch(SET_POSTS(response.data));
-                dispatch(TOGGLE_FETCHING())
+                dispatch(SET_TOTAL(response.data.length));
+                dispatch(SET_FETCHING(false))
             })
     }
 }

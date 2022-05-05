@@ -1,5 +1,5 @@
 import './style.scss'
-import preloader from './ball-triangle.svg'
+import preloader from './Rocket.gif'
 
 const Preloader = () => {
 

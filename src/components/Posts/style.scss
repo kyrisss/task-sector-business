@@ -2,36 +2,50 @@ $bg-thead: #474955;
 $color-light: #ffffff;
 $color-border: #E3E6EC;
 
-.table{
+.table {
     margin-top: 15px;
     border-spacing: 0px;
     border-collapse: collapse;
-    
+    width: 100%;
 
-    &__title{
+
+    &__title {
         background-color: $bg-thead;
         box-shadow: 0px 4px 27px rgba(230, 231, 234, 0.78);
         color: $color-light;
 
-        tr{
-            
-            td{
+            &_sort-down {
+                background-image: url(./down.svg);
+                background-repeat: no-repeat;
+                background-position:  70% center;
+                min-width: 110px;
+                padding: 19px 0 16px;
+                text-align: center;
+                cursor: pointer;
+
+            }
+            &_sort-up {
+                background-image: url(./up.svg);
+                background-repeat: no-repeat;
+                background-position: 70% center;
                 min-width: 110px;
                 padding: 19px 0 16px;
                 text-align: center;
                 cursor: pointer;
             }
-        }
     }
 
-    .posts{
+    .posts {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 137.69%;
 
-        td{
+        td {
             padding: 10px;
             border: 1px solid $color-border;
         }
 
-        td:first-child{
+        td:first-child {
             text-align: center;
         }
     }

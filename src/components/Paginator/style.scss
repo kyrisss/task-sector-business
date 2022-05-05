@@ -1,0 +1,41 @@
+$color-active: #7EBC3C;
+$color-link: #474955;
+
+.paginator {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin-top: 20px;
+
+    &__button {
+        background-color: inherit;
+        border: none;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 137.69%;
+        cursor: pointer;
+
+        &_disabled{
+            filter:opacity(.5)
+        }
+    }
+
+    .pages {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        &__page {
+            font-style: italic;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 137.69%;
+            text-decoration: none;
+            color: $color-link;
+
+            &_active {
+                color: $color-active;
+            }
+        }
+    }
+}

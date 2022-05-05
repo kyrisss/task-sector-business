@@ -4,7 +4,7 @@ interface PropType {
     posts: PostType[]
 }
 
-const Posts: React.FC<PropType> = ({posts}) => {
+const Posts: React.FC<PropType> = ({ posts }) => {
 
     const mapPosts = posts.map(post => {
         return (
@@ -18,7 +18,11 @@ const Posts: React.FC<PropType> = ({posts}) => {
 
     return (
         <tbody className="table__items posts">
-            {mapPosts}
+            {posts.length ? mapPosts :
+                <tr className="posts__error" >
+                    <td colSpan={3}>Posts not found</td>
+                </tr>
+            }
         </tbody>
     )
 }
