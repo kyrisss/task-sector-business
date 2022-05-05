@@ -13,7 +13,6 @@ export interface initialPostsStoreType {
     posts: PostType[],
     isFetching: boolean,
     search: string
-
 }
 
 let initialStore: initialPostsStoreType = {

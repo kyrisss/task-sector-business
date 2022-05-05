@@ -4,14 +4,14 @@ import search from './search.svg'
 import './style.scss'
 
 interface PropsType{
-
+    SET_SEARCH: (search:string) => void
 }
 
 const SearchPanel: React.FC<PropsType> = (props) => {
 
 
     const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) =>{
-        SET_SEARCH(e.target.value)
+        props.SET_SEARCH(e.target.value)
     }
 
     return(

@@ -1,0 +1,39 @@
+$bg-thead: #474955;
+$color-light: #ffffff;
+$color-border: #E3E6EC;
+
+.table{
+    margin-top: 15px;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    
+
+    &__title{
+        background-color: $bg-thead;
+        box-shadow: 0px 4px 27px rgba(230, 231, 234, 0.78);
+        color: $color-light;
+
+        tr{
+            
+            td{
+                min-width: 110px;
+                padding: 19px 0 16px;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .posts{
+
+        td{
+            padding: 10px;
+            border: 1px solid $color-border;
+        }
+
+        td:first-child{
+            text-align: center;
+        }
+    }
+
+}
